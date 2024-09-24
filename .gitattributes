@@ -1,0 +1,13 @@
+# Forzar los finales de línea LF para archivos de código
+*.py text eol=lf
+*.sh text eol=lf
+
+# Tratamiento de imágenes como archivos binarios
+*.png binary
+*.jpg binary
+
+# Ignorar cambios de fin de línea en archivos de texto Markdown
+*.md text eol=lf
+
+# Para archivos CSV, usar LF siempre
+*.csv text eol=lf
