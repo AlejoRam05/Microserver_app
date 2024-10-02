@@ -13,7 +13,7 @@ class UserMain(BaseModel):
     email: EmailStr 
     hashed_password: str 
     created_at: datetime = datetime.now()
-    update: datetime | None = None
+    updated_at: datetime | None = None
     
 # name: str | None = None  "| None = None -> nos permite obviar ese parametro"
 async def user_client(usuarios: UserMain) -> UserMain:

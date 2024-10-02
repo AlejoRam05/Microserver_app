@@ -17,7 +17,7 @@ def test_user_repository():
     assert user.email == "alejo15@hotmal.com"
     assert user.hashed_password == "manuelRam15"
     assert isinstance(user.created_at, datetime)
-    assert user.update is None
+    assert user.updated_at is None
 
 def test_user_repository1():
     user = UserMain(
