@@ -8,3 +8,8 @@ async def root():
     return saludo["mensaje"]
 
 # uvicorn main:app --reload
+
+@app.get("/login")
+async def user():
+    pass
+    
