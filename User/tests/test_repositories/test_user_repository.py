@@ -19,7 +19,7 @@ def test_user_repository():
     assert isinstance(user.created_at, datetime)
     assert user.updated_at is None
 
-def test_user_repository1():
+def test_user_funtion():
     user = UserMain(
         id=1,
         name="Emmanuel",
