@@ -3,33 +3,31 @@ from User.models.user_model import UserMain, user_client
 import asyncio
 
 def test_user_repository():
-    user = UserMain(
-        id=1,
-        name="Emmanuel",
-        username="Alejo1505@",
-        email="alejo15@hotmal.com",
-        hashed_password="manuelRam15",
-    )
+    user_data = {
+        "id": 1,
+        "name": "John Doe",
+        "username": "johndoe",
+        "email": "johndoe@example.com",
+        "hashed_password": "hashed_pass_123"
+    }
+    user = UserMain(**user_data)
     
     assert user.id == 1
-    assert user.name == "Emmanuel"
-    assert user.username == "Alejo1505@"
-    assert user.email == "alejo15@hotmal.com"
-    assert user.hashed_password == "manuelRam15"
+    assert user.name == "John Doe"
+    assert user.username == "johndoe"
+    assert user.email == "johndoe@example.com"
+    assert user.hashed_password == "hashed_pass_123"
     assert isinstance(user.created_at, datetime)
     assert user.updated_at is None
 
 def test_user_repository1():
-    user = UserMain(
-        id=1,
-        name="Emmanuel",
-        username="Alejo1505@",
-        email="alejo15@hotmal.com",
-        hashed_password="manuelRam15",
-    )
+    user_data = {
+        "id": 1,
+        "name": "John Doe",
+        "username": "johndoe",
+        "email": "johndoe@example.com",
+        "hashed_password": "hashed_pass_123"
+    }
+    user = UserMain(**user_data)
     result = asyncio.run(user_client(user))
-    assert result.id == 1
-    assert result.name == "Emmanuel"
-    assert result.username == "Alejo1505@"
-    assert result.email == "alejo15@hotmal.com"
-    assert result.hashed_password == "manuelRam15"
+    assert result == user
