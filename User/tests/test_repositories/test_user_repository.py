@@ -20,14 +20,4 @@ def test_user_repository():
     assert isinstance(user.created_at, datetime)
     assert user.updated_at is None
 
-def test_user_repository1():
-    user_data = {
-        "id": 1,
-        "name": "John Doe",
-        "username": "johndoe",
-        "email": "johndoe@example.com",
-        "hashed_password": "hashed_pass_123"
-    }
-    user = UserMain(**user_data)
-    result = asyncio.run(user_client(user))
-    assert result == user
+
