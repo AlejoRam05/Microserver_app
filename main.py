@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from User.models.user_model import create_db
+from User.models.user_model import DatabaseUser
 app = FastAPI()
 
 @app.get("/")
@@ -15,4 +15,4 @@ async def user():
    
 @app.on_event("startup")
 def startup_event():
-    create_db()
+    DatabaseUser.create_db()
