@@ -1,5 +1,5 @@
 """Definimos la entidad USER"""
-from pydantic import EmailStr
+from pydantic import EmailStr, BaseModel
 from datetime import datetime
 from typing import Optional, Annotated
 from sqlmodel import Field, Session, SQLModel, create_engine, select
@@ -21,12 +21,14 @@ def get_session():
 
 SessionDep = Annotated[Session, Depends(get_session)]
 
-class UserMain(SQLModel, table=True):
-    "Valores/Data que debe ingresar el usuario, valores que espera la Clase User"
-    id: int = Field(default=None, primary_key=True)
+class UserClient(BaseModel):
     name: str = Field(index=True)
     username: str = Field(index=True)
     email: EmailStr 
+
+class UserMain(SQLModel,UserClient, table=True):
+    "Valores/Data que debe ingresar el usuario, valores que espera la Clase User"
+    id: int = Field(default=None, primary_key=True)
     hashed_password: str 
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: Optional[datetime] = Field(default=None)
@@ -63,8 +65,8 @@ async def read_clientes(session: SessionDep, offset: int=0, limit: Annotated[int
     statement = select(UserMain).offset(offset).limit(limit)
     return session.exec(statement).all()
 
-def read_usuario(id: int, session: SessionDep) -> UserMain:
-    usuario = session.get(UserMain, id)
+def read_usuario(id: int, session: SessionDep) -> UserClient:
+    usuario = session.get(UserClient, id)
     if not usuario:
         raise HTTPException(status_code=404, detail="Hero not found")
     return usuario
