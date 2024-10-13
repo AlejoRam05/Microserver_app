@@ -1,10 +1,10 @@
 from datetime import datetime
-from User.models.user_model import UserMain, user_client
-import asyncio
+from User.models.user_model import UserMain
+
 
 def test_user_repository():
     user_data = {
-        "id": 1,
+        "id": int,
         "name": "John Doe",
         "username": "johndoe",
         "email": "johndoe@example.com",
@@ -12,7 +12,7 @@ def test_user_repository():
     }
     user = UserMain(**user_data)
     
-    assert user.id == 1
+    assert user.id is int
     assert user.name == "John Doe"
     assert user.username == "johndoe"
     assert user.email == "johndoe@example.com"
