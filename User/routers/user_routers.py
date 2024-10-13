@@ -5,7 +5,7 @@ from User.models.user_model import UserMain, create_cliente, read_clientes
 from dotenv import load_dotenv
 import os 
 
-router = APIRouter()
+router = APIRouter(prefix="/login")
 load_dotenv()
 sqlite_file_name = os.getenv("sqlite_file_name")
 sqlite_url = f"sqlite:///{sqlite_file_name}"
@@ -16,21 +16,21 @@ def get_session():
     with Session(engine) as session:
         yield session
 
-@router.get("/")
+@router.get("/star")
 async def root():
-    return {"mensaje": "Hola Penguin"}
+    return {"mensaje": "Bienvenid a la barberia"}
 
-@router.post("/login")
+@router.post("/")
 async def incluir_user(user: UserMain, session: Session = Depends(get_session)):
     new_user = await create_cliente(user, session)
     return new_user
 
-@router.get("/login", response_model=List[UserMain])
+@router.get("/", response_model=List[UserMain])
 async def lista_user(offset: int = 0, limit: int = 100, session: Session = Depends(get_session)):
     lista_usuarios = await read_clientes(session, offset, limit)
     return lista_usuarios
 
-@router.get("/login/{id}")
+@router.get("/{id}")
 async def ver_usuario(id: int, session: Session = Depends(get_session)):
     usuario = session.get(UserMain, id)
     if not usuario:
