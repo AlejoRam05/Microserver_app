@@ -1,0 +1,4 @@
+__pycache__/
+.venv/
+user_database.db
+.env

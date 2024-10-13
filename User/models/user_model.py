@@ -1,9 +1,10 @@
 """Definimos la entidad USER"""
-from typing import Annotated
-from pydantic import BaseModel, EmailStr
+from pydantic import EmailStr
 from datetime import datetime
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 from sqlalchemy import text
+from dotenv import load_dotenv
+import os
 # from dotenv import load_dotenv
 #BaseModel nos ayuda a crear nuestro modelo
 
@@ -18,17 +19,20 @@ class UserMain(SQLModel, table=True):
     updated_at: datetime | None = None
     
 # name: str | None = None  "| None = None -> nos permite obviar ese parametro"
-async def user_client(usuarios: UserMain) -> UserMain:
-    return usuarios
 
-
-def create_db():
-    sqlite_file_name = r"C:\\Users\\Creativa\\Documents\\GitHub\\Microserver_app\\User\\user_database.db"
-    sqlite_url = f"sqlite:///{sqlite_file_name}"
-    connect_args = {"check_same_thread": False}
-    engine = create_engine(sqlite_url, connect_args=connect_args)
-    SQLModel.metadata.create_all(engine)
+class DatabaseUser:
     
-    with Session(engine) as session:
-        tables = session.exec(text("SELECT name FROM sqlite_master WHERE type='table';")).all()
-        print("Tablas creadas:", tables)
+    @staticmethod
+    def create_db():
+        load_dotenv()
+        sqlite_file_name = os.getenv("sqlite_file_name")
+        sqlite_url = f"sqlite:///{sqlite_file_name}"
+        connect_args = {"check_same_thread": False}
+        engine = create_engine(sqlite_url, connect_args=connect_args)
+        SQLModel.metadata.create_all(engine) # crea la base de  datos
+        try:
+            with Session(engine) as session:
+                tables = session.exec(text("SELECT name FROM sqlite_master WHERE type='table';")).all()
+                print("Tablas creadas:", tables)
+        except Exception as e:
+            print("Error al interactuar con el Database", e)
