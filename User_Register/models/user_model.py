@@ -64,9 +64,3 @@ async def create_cliente(cliente: UserMain, session: SessionDep) -> UserMain:
 async def read_clientes(session: SessionDep, offset: int=0, limit: Annotated[int, Query(le=100)]=100) -> list[UserMain]:
     statement = select(UserMain).offset(offset).limit(limit)
     return session.exec(statement).all()
-
-def read_usuario(id: int, session: SessionDep) -> UserClient:
-    usuario = session.get(UserClient, id)
-    if not usuario:
-        raise HTTPException(status_code=404, detail="Hero not found")
-    return usuario
