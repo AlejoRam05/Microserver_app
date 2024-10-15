@@ -5,7 +5,7 @@ from User.models.user_model import UserMain, create_cliente, read_clientes
 from dotenv import load_dotenv
 import os 
 
-router = APIRouter(prefix="/login")
+router = APIRouter(prefix="/register")
 load_dotenv()
 sqlite_file_name = os.getenv("sqlite_file_name")
 sqlite_url = f"sqlite:///{sqlite_file_name}"
