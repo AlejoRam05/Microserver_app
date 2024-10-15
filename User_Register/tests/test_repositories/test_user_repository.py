@@ -1,5 +1,5 @@
 from datetime import datetime
-from User.models.user_model import UserMain
+from User_Register.models.user_model import UserMain
 
 
 def test_user_repository():

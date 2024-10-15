@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-from User.routers.user_routers import router as user_router
-from User.models.user_model import DatabaseUser
+from User_Register.routers.user_routers import router as user_router
+from User_Register.models.user_model import DatabaseUser
 
 app = FastAPI()
 

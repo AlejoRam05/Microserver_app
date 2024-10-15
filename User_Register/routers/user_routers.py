@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session, create_engine
 from typing import List
-from User.models.user_model import UserMain, create_cliente, read_clientes
+from User_Register.models.user_model import UserMain, create_cliente, read_clientes
 from dotenv import load_dotenv
 import os 
 
