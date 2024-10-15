@@ -36,7 +36,7 @@ async def incluir_user(user: UserMain, session: Session = Depends(get_session)):
 
 @router.get("/", response_model=List[UserMain])
 async def lista_user(offset: int = 0, limit: int = 100, session: Session = Depends(get_session)):
-    """Obtener una lista de usuarios con paginación."""
+    """Obtener una lista de usuarios."""
     lista_usuarios = await read_clientes(session, offset, limit)
     return lista_usuarios
 
