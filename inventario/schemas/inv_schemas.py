@@ -13,7 +13,7 @@ class InventoryBase(BaseModel):
     
 class InventoryDB(SQLModel, table = True):
     
-    code: Optional[int] = Field(index=True, primary_key=True, default=None)
+    code: Optional[int] = Field(index=True, primary_key=True, autoincrement=True)
     product: str 
     price: int 
     description: str
