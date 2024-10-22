@@ -1,5 +1,5 @@
 __pycache__/
 .venv/
-user_database.db
+product.db
 .env
 inventario.db

@@ -7,12 +7,6 @@ from sqlmodel import Session
 router = APIRouter(prefix="/inventario", tags=["Inventario"])
 
 
-@router.get("/productos")
-async def root():
-    return {"mensaje": "Hola productos"}
-
-
-
 @router.get("/")
 async def obtener_invetario(session: Session = Depends(get_session)):
     inventario = session.query(InventoryDB).all()
