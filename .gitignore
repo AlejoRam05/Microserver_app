@@ -2,4 +2,4 @@ __pycache__/
 .venv/
 user_database.db
 .env
-inv_register_database.db
+inventario.db
